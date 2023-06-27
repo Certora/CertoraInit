@@ -42,6 +42,10 @@ jobs:
           sudo mv solc-static-linux /usr/local/bin/solc-0.8.0
           chmod +x /usr/local/bin/solc-0.8.0
 
+          wget https://github.com/ethereum/solidity/releases/download/v0.8.17/solc-static-linux
+          sudo mv solc-static-linux /usr/local/bin/solc-0.8.17
+          chmod +x /usr/local/bin/solc-0.8.17
+
       # Do the actual verification.  The `run` field could be simply
       #
       #   certoraRun certora/conf/${{ matrix.params }}
