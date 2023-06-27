@@ -101,5 +101,5 @@ jobs:
           #- {name: onlyHolderCanChangeAllowance, command: 'ERC20.conf --rule onlyHolderCanChangeAllowance'}
           #- {name: balancesBoundedByTotalSupply, command: 'ERC20.conf --rule balancesBoundedByTotalSupply'}
           #- {name: totalSupplyIsSumOfBalances,   command: 'ERC20.conf --rule totalSupplyIsSumOfBalances'}
-          - {name: ERC20, command: 'ERC20.conf'}
+          - {name: generalRulesOnERC20, command: 'generalRules_ERC20.conf'}
 
