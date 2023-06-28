@@ -96,9 +96,8 @@ rule onlyHolderCanChangeAllowance {
 
 //// ## Part 3: invariants /////////////////////////////////////////////////////
 
-/// This rule is unsound
-invariant balancesBoundedByTotalSupply(address alice, address bob)
-    balanceOf(alice) + balanceOf(bob) <= to_mathint(totalSupply())
+invariant balanceAddressZero(address alice, address bob)
+    balanceOf(0) == 0
 {
     preserved transfer(address recip, uint256 amount) with (env e) {
         require recip        == alice || recip        == bob;
