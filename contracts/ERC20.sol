@@ -3,9 +3,6 @@
 
 pragma solidity ^0.8.0;
 
-import "./../contracts/IERC20.sol";
-import "./../contracts/IERC20Metadata.sol";
-
 /**
  * @dev Implementation of the {IERC20} interface.
  *
@@ -31,7 +28,7 @@ import "./../contracts/IERC20Metadata.sol";
  * functions have been added to mitigate the well-known issues around setting
  * allowances. See {IERC20-approve}.
  */
-contract ERC20 is IERC20, IERC20Metadata {
+contract ERC20 {
     mapping(address => uint256) private _balances;
 
     mapping(address => mapping(address => uint256)) private _allowances;
@@ -179,7 +176,7 @@ contract ERC20 is IERC20, IERC20Metadata {
         require(
             currentAllowance >= amount,
             "ERC20: transfer amount exceeds allowance"
-        ); 
+        );
         unchecked {
             _approve(sender, msg.sender, currentAllowance - amount);
         }
@@ -210,7 +207,7 @@ contract ERC20 is IERC20, IERC20Metadata {
             msg.sender,
             spender,
             _allowances[msg.sender][spender] + addedValue
-        ); 
+        );
         return true;
     }
 
@@ -273,7 +270,7 @@ contract ERC20 is IERC20, IERC20Metadata {
         require(
             senderBalance >= amount,
             "ERC20: transfer amount exceeds balance"
-        ); 
+        );
         unchecked {
             _balances[sender] = senderBalance - amount;
         }

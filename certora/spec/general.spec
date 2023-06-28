@@ -1,4 +1,4 @@
-using DummyERC20A as erc20;
+using ERC20 as erc20;
 
 methods {
     function _.name() external => DISPATCHER(true);
@@ -11,10 +11,10 @@ methods {
     function _.transfer(address,uint256) external => DISPATCHER(true);
     function _.transferFrom(address,address,uint256) external => DISPATCHER(true);
 
-	function erc20.balanceOf(address) external returns (uint256) envfree;
+    function erc20.balanceOf(address) external returns (uint256) envfree;
 }
 
-/* 
+/*
 	Property: Find and show a path for each method.
 */
 rule reachability(method f)
@@ -25,40 +25,40 @@ rule reachability(method f)
 	satisfy true;
 }
 
-/* 
+/*
    	Property: Define and check functions that should never revert
-	Notice:  use f.selector to state which functions should not revert,e.g.f.selector == sig:balanceOf(address).selector 
-*/  
-definition nonReveritngFunction(method f ) returns bool = true; 
+	Notice:  use f.selector to state which functions should not revert,e.g.f.selector == sig:balanceOf(address).selector
+*/
+definition nonRevertingFunction(method f ) returns bool = true;
 
-rule noRevert(method f) filtered {f -> nonReveritngFunction(f) }
+rule noRevert(method f) filtered {f -> nonRevertingFunction(f) }
 {
 	env e;
 	calldataarg arg;
-    //consider auto filtering for non-payable functions 
-	require e.msg.value == 0; 
-	f@withrevert(e, arg); 
+    //consider auto filtering for non-payable functions
+	require e.msg.value == 0;
+	f@withrevert(e, arg);
 	assert !lastReverted, "method should not revert";
 }
 
 
-/* 
-    Property: Checks if a function can be frontrun 
+/*
+    Property: Checks if a function can be frontrun
     Notice: Can be enhanced to check more than one function as rules can be double-parameteric
-*/ 
+*/
 rule simpleFrontRunning(method f, method g) filtered { f-> !f.isView, g-> !g.isView }
 {
 	env e1;
 	calldataarg arg;
 
 	storage initialStorage = lastStorage;
-	f(e1, arg); 
-	
+	f(e1, arg);
+
 
 	env e2;
 	calldataarg arg2;
 	require e2.msg.sender != e1.msg.sender;
-	g(e2, arg2) at initialStorage; 
+	g(e2, arg2) at initialStorage;
 
 	f@withrevert(e1, arg);
 	bool succeeded = !lastReverted;
@@ -67,7 +67,7 @@ rule simpleFrontRunning(method f, method g) filtered { f-> !f.isView, g-> !g.isV
 }
 
 
-/** 
+/**
     @title -   This rule find which functions are privileged.
     @notice A function is privileged if there is only one address that can call it.
     @dev The rules finds this by finding which functions can be called by two different users.
@@ -94,7 +94,7 @@ rule privilegedOperation(method f, address privileged)
 
 
 rule decreaseInSystemEth(method f) {
-   
+
     uint256 before = nativeBalances[currentContract];
 
     env e;
@@ -103,12 +103,12 @@ rule decreaseInSystemEth(method f) {
 
     uint256 after = nativeBalances[currentContract];
 
-    assert after >= before ||  false ; /* fill in cases where eth can decrease */ 
+    assert after >= before ||  false ; /* fill in cases where eth can decrease */
 }
 
 
 rule decreaseInERC20(method f) {
-   
+
     uint256 before = erc20.balanceOf(currentContract);
 
     env e;
@@ -117,6 +117,6 @@ rule decreaseInERC20(method f) {
 
     uint256 after = erc20.balanceOf(currentContract);
 
-    assert after >= before ||  false ; /* fill in cases eth can decrease */ 
+    assert after >= before ||  false ; /* fill in cases eth can decrease */
 
-} 
+}
