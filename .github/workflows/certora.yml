@@ -1,7 +1,5 @@
-# This is an example configuration file for running Certora verification
-# through github actions.  You can see the results for each push in the
-# "Actions" tab on the github website.
-#
+# A workflow file for running Certora verification through github actions.
+# Find results for each push in the "Actions" tab on the github website.
 name: Certora verification
 
 on:
@@ -49,7 +47,7 @@ jobs:
       # Do the actual verification.  The `run` field could be simply
       #
       #   certoraRun certora/conf/${{ matrix.params }}
-      # 
+      #
       # but we do a little extra work to get the commit messages into the
       # `--msg` argument to `certoraRun`
       #
