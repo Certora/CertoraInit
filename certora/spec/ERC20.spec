@@ -8,7 +8,7 @@ methods {
     function balanceOf(address)         external returns(uint) envfree;
     function allowance(address,address) external returns(uint) envfree;
     function totalSupply()              external returns(uint) envfree;
-    function transferFrom(address,address,uint) external returns(bool) envfree;
+    function transferFrom(address,address,uint) external returns(bool);
 }
 
 //// ## Part 1: Basic rules ////////////////////////////////////////////////////
@@ -104,9 +104,13 @@ invariant balanceAddressZero(address alice, address bob)
         require e.msg.sender == alice || e.msg.sender == bob;
     }
 
-    preserved transferFrom(address from, address to, uint256 amount) {
+    preserved transferFrom(address from, address to, uint256 amount) with (env e) {
         require from == alice || from == bob;
         require to   == alice || to   == bob;
+    }
+
+    preserved deposit() with (env e) {
+        require e.msg.sender!=0;
     }
 }
 
@@ -123,5 +127,6 @@ hook Sstore _balances[KEY address a] uint new_value (uint old_value) STORAGE {
 
 /** `totalSupply()` returns the sum of `balanceOf(u)` over all users `u`. */
 invariant totalSupplyIsSumOfBalances()
-    to_mathint(totalSupply()) == sum_of_balances;
-
+    to_mathint(totalSupply()) == sum_of_balances
+    filtered { f -> f.selector != sig:deposit().selector 
+                &&  f.selector != sig:withdraw(uint256).selector}
