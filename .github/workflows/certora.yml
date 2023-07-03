@@ -95,15 +95,7 @@ jobs:
           # parametric rule, although it is certainly possible to run everything
           # at once by not passing the `--rule` or `--method` options
           #- {name: transferSpec,                 command: 'ERC20.conf --rule transferSpec'}
-          #- {name: transferReverts,              command: 'ERC20.conf --rule transferReverts'}
-          #- {name: transferDoesntRevert,         command: 'ERC20.conf --rule transferDoesntRevert'}
-          #- {name: transferFromSpec,             command: 'ERC20.conf --rule transferFromSpec'}
-          #- {name: transferFromReverts,          command: 'ERC20.conf --rule transferFromReverts'}
-          #- {name: transferFromDoesntRevert,     command: 'ERC20.conf --rule transferFromDoesntRevert'}
-          #- {name: onlyHolderCanChangeAllowance, command: 'ERC20.conf --rule onlyHolderCanChangeAllowance'}
-          #- {name: balancesBoundedByTotalSupply, command: 'ERC20.conf --rule balancesBoundedByTotalSupply'}
-          #- {name: totalSupplyIsSumOfBalances,   command: 'ERC20.conf --rule totalSupplyIsSumOfBalances'}
-          - {name: generalRulesOnERC20, command: 'generalRules_ERC20.conf --debug'}
-          - {name: generalRulesOnVAULT, command: 'generalRules_VAULT.conf --debug'}
-          - {name: RulesForERC20, command: 'ERC20Rules.conf --debug'}
+          #- {name: generalRulesOnERC20, command: 'generalRules_ERC20.conf --debug'}
+          #- {name: generalRulesOnVAULT, command: 'generalRules_VAULT.conf --debug'}
+          - {name: RulesForERC20, command: 'default.conf --debug'}
 

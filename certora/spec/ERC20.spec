@@ -12,6 +12,16 @@ methods {
 }
 
 //// ## Part 1: Basic rules ////////////////////////////////////////////////////
+/* 
+	Property: Find and show a path for each method.
+*/
+rule reachability(method f)
+{
+	env e;
+	calldataarg args;
+	f(e,args);
+	satisfy true;
+}
 
 /// Transfer must move `amount` tokens from the caller's account to `recipient`
 rule transferSpec {
@@ -109,9 +119,6 @@ invariant balanceAddressZero(address alice, address bob)
         require to   == alice || to   == bob;
     }
 
-    preserved deposit() with (env e) {
-        require e.msg.sender!=0;
-    }
 }
 
 //// ## Part 4: ghosts and hooks ///////////////////////////////////////////////
@@ -127,6 +134,4 @@ hook Sstore _balances[KEY address a] uint new_value (uint old_value) STORAGE {
 
 /** `totalSupply()` returns the sum of `balanceOf(u)` over all users `u`. */
 invariant totalSupplyIsSumOfBalances()
-    to_mathint(totalSupply()) == sum_of_balances
-    filtered { f -> f.selector != sig:deposit().selector 
-                &&  f.selector != sig:withdraw(uint256).selector}
+    to_mathint(totalSupply()) == sum_of_balances;
