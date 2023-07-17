@@ -28,7 +28,7 @@ To run the checks from the command line, install the Python SDK and Prover Tool 
 certoraRun ./certora/conf/default.conf 
 
 ## CVL Examples
-See more  <a href="https://github.com/Certora/Examples/tree/master/CVLByExamples" target="_blank">CVL specification general examples</a>.
+See more  <a href="https://github.com/Certora/Examples/tree/master/CVLByExample" target="_blank">CVL specification general examples</a>.
 
 ## VSCode Extension
 Try out our official Beta version of <a href="https://marketplace.visualstudio.com/items?itemName=Certora.vscode-certora-prover" target="_blank">VSCode Extension</a>, allowing easier and more convenient access to the impressive capabilities of the Certora Prover.
