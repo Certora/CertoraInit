@@ -5,7 +5,7 @@ CertoraInit Repository
 This repository provides a fully functional skeleton for integrating with Certora.
 Please note that formal verification can be highly resource intensive, and complex proofs may quickly become intractable.
 A community of experts exists which can help guide you.
-We welcome you to contact us via <a href="https://discord.gg/KEvKTWBC" target="_blank">Discord Help-Desk channel</a> 
+We welcome you to contact us via <a href="https://discord.gg/certora" target="_blank">Discord Help-Desk channel</a> 
 for help integrating formal methods into your project.
 
 ## Through CI
