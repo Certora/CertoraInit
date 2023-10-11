@@ -37,7 +37,7 @@ rule transferSpec {
     transfer(e, recipient, amount);
 
     mathint balance_sender_after = balanceOf(sender);
-    mathint balance_recip_after = balanceOf(recipient);
+    mathint balance_recipient_after = balanceOf(recipient);
 
     assert balance_sender_after == balance_sender_before - amount,
         "transfer must decrease sender's balance by amount";
