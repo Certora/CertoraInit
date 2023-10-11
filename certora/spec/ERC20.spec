@@ -8,7 +8,6 @@ methods {
     function balanceOf(address)         external returns(uint) envfree;
     function allowance(address,address) external returns(uint) envfree;
     function totalSupply()              external returns(uint) envfree;
-    function transferFrom(address,address,uint) external returns(bool);
 }
 
 //// ## Part 1: Basic rules ////////////////////////////////////////////////////
