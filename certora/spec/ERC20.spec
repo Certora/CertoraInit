@@ -5,8 +5,8 @@
  */
 
 methods {
-    function balanceOf(address)         external returns(uint) envfree;
     function allowance(address,address) external returns(uint) envfree;
+    function balanceOf(address)         external returns(uint) envfree;
     function totalSupply()              external returns(uint) envfree;
 }
 
@@ -19,7 +19,7 @@ rule reachability(method f)
 	env e;
 	calldataarg args;
 	f(e,args);
-	satisfy true;
+	satisfy true, "a non-reverting path through this method was found";
 }
 
 /// Transfer must move `amount` tokens from the caller's account to `recipient`
@@ -78,7 +78,7 @@ rule transferDoesntRevert {
     require recipient != 0;
 
     transfer@withrevert(e, recipient, amount);
-    assert !lastReverted;
+    assert !lastReverted, "transfer should not revert";
 }
 
 
