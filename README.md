@@ -25,7 +25,7 @@ Then run from this directory:
 If you encounter problems or have questions, please read our detailed <a href="https://docs.certora.com/en/latest/docs/user-guide/getting-started/install.html" target="_blank">installation guide</a>.
 
 ## CVL Examples
-See more  <a href="https://github.com/Certora/Examples/tree/master/CVLByExample" target="_blank">CVL specification general examples</a>.
+See more <a href="https://github.com/Certora/Examples/tree/master/CVLByExample" target="_blank">CVL specification general examples</a>.
 
 ## VSCode Extension
 Try out our official Beta version of <a href="https://marketplace.visualstudio.com/items?itemName=Certora.vscode-certora-prover" target="_blank">VSCode Extension</a>, allowing easier and more convenient access to the impressive capabilities of the Certora Prover.
