@@ -6,6 +6,8 @@ A community of experts exists that can help guide you.
 We welcome you to contact us via <a href="https://discord.gg/certora" target="_blank">Discord Help-Desk channel</a> 
 for help integrating formal methods into your project.
 
+To use this repository, `solc` on your machine must point a Solidity compiler of version 0.8.0 or higher.
+
 ## Through CI
 
 The workflow file in this repository is completely integrated with Certora.
