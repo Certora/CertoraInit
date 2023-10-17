@@ -5,10 +5,9 @@
  */
 
 methods {
-    function balanceOf(address)         external returns(uint) envfree;
     function allowance(address,address) external returns(uint) envfree;
+    function balanceOf(address)         external returns(uint) envfree;
     function totalSupply()              external returns(uint) envfree;
-    function transferFrom(address,address,uint) external returns(bool);
 }
 
 //// ## Part 1: Basic rules ////////////////////////////////////////////////////
@@ -20,44 +19,44 @@ rule reachability(method f)
 	env e;
 	calldataarg args;
 	f(e,args);
-	satisfy true;
+	satisfy true, "a non-reverting path through this method was found";
 }
 
 /// Transfer must move `amount` tokens from the caller's account to `recipient`
 rule transferSpec {
-    address sender; address recip; uint amount;
+    address sender; address recipient; uint amount;
+
+    require sender != recipient;
 
     env e;
     require e.msg.sender == sender;
 
     mathint balance_sender_before = balanceOf(sender);
-    mathint balance_recip_before = balanceOf(recip);
+    mathint balance_recipient_before = balanceOf(recipient);
 
-    transfer(e, recip, amount);
+    transfer(e, recipient, amount);
 
     mathint balance_sender_after = balanceOf(sender);
-    mathint balance_recip_after = balanceOf(recip);
-
-    require sender != recip;
+    mathint balance_recipient_after = balanceOf(recipient);
 
     assert balance_sender_after == balance_sender_before - amount,
         "transfer must decrease sender's balance by amount";
 
-    assert balance_recip_after == balance_recip_before + amount,
+    assert balance_recipient_after == balance_recipient_before + amount,
         "transfer must increase recipient's balance by amount";
 }
 
 
 /// Transfer must revert if the sender's balance is too small
 rule transferReverts {
-    env e; address recip; uint amount;
+    env e; address recipient; uint amount;
 
     require balanceOf(e.msg.sender) < amount;
 
-    transfer@withrevert(e, recip, amount);
+    transfer@withrevert(e, recipient, amount);
 
     assert lastReverted,
-        "transfer(recip,amount) must revert if sender's balance is less than `amount`";
+        "transfer(recipient, amount) must revert if sender's balance is less than `amount`";
 }
 
 
@@ -79,7 +78,7 @@ rule transferDoesntRevert {
     require recipient != 0;
 
     transfer@withrevert(e, recipient, amount);
-    assert !lastReverted;
+    assert !lastReverted, "transfer should not revert";
 }
 
 
@@ -109,8 +108,8 @@ rule onlyHolderCanChangeAllowance {
 invariant balanceAddressZero(address alice, address bob)
     balanceOf(0) == 0
 {
-    preserved transfer(address recip, uint256 amount) with (env e) {
-        require recip        == alice || recip        == bob;
+    preserved transfer(address recipient, uint256 amount) with (env e) {
+        require recipient    == alice || recipient    == bob;
         require e.msg.sender == alice || e.msg.sender == bob;
     }
 
