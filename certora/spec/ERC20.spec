@@ -71,7 +71,7 @@ rule transferReverts {
 rule transferDoesntRevert {
     env e; address recipient; uint amount;
 
-    require balanceOf(e.msg.sender) > amount;
+    require balanceOf(e.msg.sender) >= amount;
     require e.msg.value == 0;
     require balanceOf(recipient) + amount < max_uint;
     require e.msg.sender != 0;
