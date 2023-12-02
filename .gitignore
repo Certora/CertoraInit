@@ -4,3 +4,6 @@ node_modules/
 # Certora
 .certora*
 
+# Mutation
+gambit_out/*
+
