@@ -31,3 +31,9 @@ See more <a href="https://github.com/Certora/Examples/tree/master/CVLByExample" 
 
 ## VSCode Extension
 Try out our official Beta version of <a href="https://marketplace.visualstudio.com/items?itemName=Certora.vscode-certora-prover" target="_blank">VSCode Extension</a>, allowing easier and more convenient access to the impressive capabilities of the Certora Prover.
+
+## Mutation Testing
+The Certora Prover is integrated with <a href=https://www.certora.com/gambit>Gambit</a>, an open source Solidity mutation testing tool. Mutation tetsing can give you an estimate about the coverage of your verification.
+To run the mutation test from this directory:
+`certoraMutate --prover_conf certora/conf/default.conf --mutation_conf mutation/mutation.conf`
+It includes several advanced features of mutation tests, such as restricting mutation types and a manually crafted mutation. Please read the <a href="https://docs.certora.com/en/latest/docs/gambit/gambit.html" target="_blank">Gambit</a> mutation to learn more.
