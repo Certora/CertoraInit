@@ -129,7 +129,9 @@ jobs:
           chmod +x /usr/local/bin/solc8.17
       
       - name: set up the certora key (should be deleted!)
-        run: export CERTORAKEY=795ebbac71ae5fd6a19e7a214a524b064e33ff05
+        run: >
+          export CERTORAKEY=795ebbac71ae5fd6a19e7a214a524b064e33ff05
+          echo $CERTORAKEY
       
       - name: Run the mutation test
         run: certoraMutate --prover_conf certora/conf/default.conf --mutation_conf mutation/mutation.conf --debug
