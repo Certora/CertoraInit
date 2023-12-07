@@ -129,7 +129,8 @@ jobs:
           chmod +x /usr/local/bin/solc8.17
       
       - name: Run the mutation test
-        run: certoraMutate --prover_conf certora/conf/default.conf --mutation_conf mutation/mutation.conf; echo "CERTORAKEY is $CERTORAKEY and the default is 795ebbac71ae5fd6a19e7a214a524b064e33ff05"
+        run: >
+          certoraMutate --prover_conf certora/conf/default.conf --mutation_conf mutation/mutation.conf
         env:
           # For this to work, you must set your CERTORAKEY secret on the Github
           # website (settings > secrets > actions > new repository secret)
