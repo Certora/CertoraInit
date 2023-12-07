@@ -61,7 +61,7 @@ jobs:
             certora/conf/${{ matrix.params.command }} \
             --msg "$(echo $message | sed 's/[^a-zA-Z0-9., _-]/ /g')"
         env:
-          # For this to work, you must set your CERTORAKEY secret on the github
+          # For this to work, you must set your CERTORAKEY secret on the Github
           # website (settings > secrets > actions > new repository secret)
           CERTORAKEY: ${{ secrets.CERTORAKEY }}
 
@@ -128,9 +128,9 @@ jobs:
           sudo mv solc-static-linux /usr/local/bin/solc8.17
           chmod +x /usr/local/bin/solc8.17
       
-      - name: set up the certora key (should be deleted!)
-        run: >
-          echo "CERTORAKEY=795ebbac71ae5fd6a19e7a214a524b064e33ff05" >> $GITHUB_ENV
-      
       - name: Run the mutation test
-        run: certoraMutate --prover_conf certora/conf/default.conf --mutation_conf mutation/mutation.conf --debug
+        run: certoraMutate --prover_conf certora/conf/default.conf --mutation_conf mutation/mutation.conf; echo "CERTORAKEY is $CERTORAKEY and the default is 795ebbac71ae5fd6a19e7a214a524b064e33ff05"
+        env:
+          # For this to work, you must set your CERTORAKEY secret on the Github
+          # website (settings > secrets > actions > new repository secret)
+          CERTORAKEY: ${{ secrets.CERTORAKEY }}
