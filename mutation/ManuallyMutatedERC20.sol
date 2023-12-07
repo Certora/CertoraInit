@@ -1,3 +1,5 @@
+// This file contains a manual mutation, and is otherwise identical to the original file
+
 // SPDX-License-Identifier: MIT
 // OpenZeppelin Contracts v4.4.1 (token/ERC20/ERC20.sol)
 
@@ -296,11 +298,13 @@ contract ERC20 is IERC20, IERC20Metadata {
     function mint(address account, uint256 amount) onlyOwner() public virtual override {
         require(account != address(0), "ERC20: mint to the zero address");
 
+        // >>>>>>> Manual mutation: line 307 was moved from this location
+
         _totalSupply += amount;
         _balances[account] += amount;
         emit Transfer(address(0), account, amount);
 
-        _beforeTokenTransfer(address(0), account, amount);
+        _beforeTokenTransfer(address(0), account, amount); // >>>>>>> Manual mutation: this line was move here from line 301
 
         _afterTokenTransfer(address(0), account, amount);
     }
