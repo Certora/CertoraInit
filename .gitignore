@@ -6,4 +6,5 @@ node_modules/
 
 # Mutation
 gambit_out/*
+collect.json
 
