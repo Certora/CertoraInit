@@ -90,7 +90,7 @@ rule onlyHolderCanChangeAllowance {
 
     mathint allowance_before = allowance(holder, spender);
 
-    method f; env e; calldataarg args; // was: env e; uint256 amount;
+    method f; env e; uint256 amount;
     approve(e, spender, amount);
 
     mathint allowance_after = allowance(holder, spender);
