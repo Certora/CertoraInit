@@ -36,14 +36,19 @@ jobs:
       # Install the appropriate version of solc
       - name: Install solc
         run: |
-          wget https://github.com/ethereum/solidity/releases/download/v0.8.0/solc-static-linux
-          sudo mv solc-static-linux /usr/local/bin/solc8.0
-          chmod +x /usr/local/bin/solc8.0
-          ln -s /usr/local/bin/solc8.0 /usr/local/bin/solc
+          pip install solc-select
+          solc-select install 0.8.0
+          solc-select use 0.8.0
 
-          wget https://github.com/ethereum/solidity/releases/download/v0.8.17/solc-static-linux
-          sudo mv solc-static-linux /usr/local/bin/solc8.17
-          chmod +x /usr/local/bin/solc8.17
+        # It is also possible to download the solc binaries directly
+        # wget https://github.com/ethereum/solidity/releases/download/v0.8.0/solc-static-linux
+        # sudo mv solc-static-linux /usr/local/bin/solc8.0
+        # chmod +x /usr/local/bin/solc8.0
+        # ln -s /usr/local/bin/solc8.0 /usr/local/bin/solc
+
+        # wget https://github.com/ethereum/solidity/releases/download/v0.8.17/solc-static-linux
+        # sudo mv solc-static-linux /usr/local/bin/solc8.17
+        # chmod +x /usr/local/bin/solc8.17
 
       # Do the actual verification. The `run` field could be simply
       #
@@ -119,14 +124,19 @@ jobs:
       # Install the appropriate version of solc
       - name: Install solc
         run: |
-          wget https://github.com/ethereum/solidity/releases/download/v0.8.0/solc-static-linux
-          sudo mv solc-static-linux /usr/local/bin/solc8.0
-          chmod +x /usr/local/bin/solc8.0
-          ln -s /usr/local/bin/solc8.0 /usr/local/bin/solc
+          pip install solc-select
+          solc-select install 0.8.0
+          solc-select use 0.8.0
 
-          wget https://github.com/ethereum/solidity/releases/download/v0.8.17/solc-static-linux
-          sudo mv solc-static-linux /usr/local/bin/solc8.17
-          chmod +x /usr/local/bin/solc8.17
+        # It is also possible to download the solc binaries directly
+        # wget https://github.com/ethereum/solidity/releases/download/v0.8.0/solc-static-linux
+        # sudo mv solc-static-linux /usr/local/bin/solc8.0
+        # chmod +x /usr/local/bin/solc8.0
+        # ln -s /usr/local/bin/solc8.0 /usr/local/bin/solc
+
+        # wget https://github.com/ethereum/solidity/releases/download/v0.8.17/solc-static-linux
+        # sudo mv solc-static-linux /usr/local/bin/solc8.17
+        # chmod +x /usr/local/bin/solc8.17
       
       - name: Run the basic mutation test
         run: >
