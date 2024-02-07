@@ -2,7 +2,6 @@
     "gambit": [
         {
             "filename": "../contracts/ERC20.sol",
-            "solc": "solc8.0",
             "num_mutants": 2,
             "mutations": [
                 "require-mutation"
@@ -13,7 +12,6 @@
         },
         {
             "filename": "../contracts/ERC20.sol",
-            "solc": "solc8.0",
             "num_mutants": 1,
             "mutations": [
                 "assignment-mutation"
