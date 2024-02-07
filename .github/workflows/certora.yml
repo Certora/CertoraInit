@@ -1,5 +1,5 @@
-# A workflow file for running Certora verification through github actions.
-# Find results for each push in the "Actions" tab on the github website.
+# A workflow file for running Certora verification through GitHub actions.
+# Find results for each push in the "Actions" tab on the GitHub website.
 name: Certora verification
 
 on:
@@ -45,12 +45,12 @@ jobs:
           sudo mv solc-static-linux /usr/local/bin/solc8.17
           chmod +x /usr/local/bin/solc8.17
 
-      # Do the actual verification.  The `run` field could be simply
+      # Do the actual verification. The `run` field could be simply
       #
       #   certoraRun certora/conf/${{ matrix.params }}
       # 
       # but we do a little extra work to get the commit messages into the
-      # `--msg` argument to `certoraRun`
+      # `--msg` argument
       #
       # Here ${{ matrix.params }} gets replaced with each of the parameters
       # listed in the `params` section below.
@@ -61,11 +61,11 @@ jobs:
             certora/conf/${{ matrix.params.command }} \
             --msg "$(echo $message | sed 's/[^a-zA-Z0-9., _-]/ /g')"
         env:
-          # For this to work, you must set your CERTORAKEY secret on the Github
+          # For this to work, you must set your CERTORAKEY secret on the GitHub
           # website (settings > secrets > actions > new repository secret)
           CERTORAKEY: ${{ secrets.CERTORAKEY }}
 
-      # The following two steps save the output json as a github artifact.
+      # The following two steps save the output json as a GitHub artifact.
       # This can be useful for automation that collects the output.
       - name: Download output json
         if: always()
@@ -86,7 +86,7 @@ jobs:
       max-parallel: 4
       matrix:
         params:
-          # each of these commands is passed to the "Verify rule" step above,
+          # Each of these commands is passed to the "Verify rule" step above,
           # which runs certoraRun on certora/conf/<contents of the command>
           #
           # Note that each of these lines will appear as a separate run on
@@ -95,7 +95,7 @@ jobs:
           # It is often helpful to split up by rule or even by method for a
           # parametric rule, although it is certainly possible to run everything
           # at once by not passing the `--rule` or `--method` options
-          #- {name: transferSpec,                 command: 'ERC20.conf --rule transferSpec'}
+          #- {name: transferSpec,        command: 'ERC20.conf --rule transferSpec'}
           #- {name: generalRulesOnERC20, command: 'generalRules_ERC20.conf --debug'}
           #- {name: generalRulesOnVAULT, command: 'generalRules_VAULT.conf --debug'}
           - {name: RulesForERC20, command: 'default.conf --debug'}
@@ -132,7 +132,7 @@ jobs:
         run: >
           certoraMutate --prover_conf certora/conf/default.conf --mutation_conf mutation/mutation.mconf
         env:
-          # For this to work, you must set your CERTORAKEY secret on the Github
+          # For this to work, you must set your CERTORAKEY secret on the GitHub
           # website (settings > secrets > actions > new repository secret)
           CERTORAKEY: ${{ secrets.CERTORAKEY }}
 
