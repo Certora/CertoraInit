@@ -21,7 +21,7 @@ jobs:
           python-version: '3.10'
          # cache: 'pip'
       - name: Install certora
-        run: pip3 install certora-cli
+        run: pip3 install certora-cli-beta
 
       # the following is only necessary if your project depends on contracts
       # installed using yarn
@@ -132,7 +132,7 @@ jobs:
       
       - name: Run the basic mutation test
         run: >
-          certoraMutate --prover_conf certora/conf/default.conf --mutation_conf mutation/mutation.mconf
+          certoraMutate --conf certora/conf/default.conf
         env:
           # For this to work, you must set your CERTORAKEY secret on the GitHub
           # website (settings > secrets > actions > new repository secret)
@@ -140,6 +140,6 @@ jobs:
 
       - name: Run the advanced mutation test
         run: >
-          certoraMutate --prover_conf certora/conf/default.conf --mutation_conf mutation/advanced_mutation.mconf
+          certoraMutate --conf certora/conf/advanced_mutation.conf
         env:
           CERTORAKEY: ${{ secrets.CERTORAKEY }}
