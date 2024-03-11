@@ -115,7 +115,7 @@ jobs:
         # cache: 'pip'
 
       - name: Install certora
-        run: pip3 install certora-cli
+        run: pip3 install certora-cli-beta
 
       # Install the appropriate version of solc
       - name: Install solc
