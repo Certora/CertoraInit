@@ -35,6 +35,6 @@ Try out our official Beta version of <a href="https://marketplace.visualstudio.c
 ## Mutation Testing
 The Certora Prover is integrated with <a href=https://www.certora.com/gambit>Gambit</a>, an open-source Solidity mutation testing tool. Mutation testing can give you an estimate of the coverage of your verification.
 
-To run the mutation test from this directory, run `certoraMutate --prover_conf certora/conf/default.conf --mutation_conf mutation/mutation.mconf`
+To run the mutation test from this directory, run `certoraMutate --conf certora/conf/default.conf`
 
-The advanced example `mutation/advanced_mutation.mconf` includes several advanced features of mutation tests, such as restricting mutation types and a manually crafted mutation. Please read the <a href="https://docs.certora.com/en/latest/docs/gambit/gambit.html" target="_blank">Gambit</a> mutation to learn more.
+The advanced example `certora/conf/advanced_mutation.conf` includes several advanced features of mutation tests, such as restricting mutation types and a manually crafted mutation. Please read the <a href="https://docs.certora.com/en/latest/docs/gambit/gambit.html" target="_blank">Gambit</a> mutation to learn more.
